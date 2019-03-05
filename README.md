@@ -76,15 +76,16 @@ Development Url https://localhost:44356   where development url is the port on w
 
 Response<T> = { succeeded: boolean, message: string, result: T }
 
-| Name                          | Method		| Controller				       | Url
-| ----                          | ---			  | ---						           | -----
-| Sign Up                       | POST			| Authentication				  | /api/signup
-| login 					              | POST			| Authentication					| /api/login
-| Create COuntry                | POST			  | Country						      | /api/countries
-| Get All Countries             | GET			  | Country						      | /api/countries
-| Get Country by ID             | GET			  | Country						      | /api/countries/{id: int}
-| Update a Country              | PUT			  | Country						      | /api/countries/{id: int}
-| Delete a Country              | DELETE			| Country						    | /api/countries/{id: int}
+| Name                          | Method		    | Controller				       | Url
+| ----                          | ---			    | ---						       | -----
+| Sign Up                       | POST			    | Authentication				   | /api/signup
+| login 					    | POST			    | Authentication				   | /api/login
+| Create COuntry                | POST			    | Country						   | /api/countries
+| Get All Countries             | GET			    | Country						   | /api/countries
+| Get Country by ID             | GET			    | Country						   | /api/countries/{id: int}
+| Update a Country              | PUT			    | Country						   | /api/countries/{id: int}
+| Delete a Country              | DELETE			| Country						   | /api/countries/{id: int}
+| Get All activities            | GET			    | Country						   | /api/activities
 
 
 
