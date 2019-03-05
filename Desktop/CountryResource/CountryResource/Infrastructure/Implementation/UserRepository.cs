@@ -21,9 +21,7 @@ namespace CountryResource.Infrastructure.Implementation
         public async Task<(bool Status, string Message)> CreateUser(UserModel model)
         {
             var user = new User().Assign(model);
-            //user.UserName = model.Email;           
-
-
+          
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(model.password, out passwordHash, out passwordSalt);
             user.PasswordHash = passwordHash;

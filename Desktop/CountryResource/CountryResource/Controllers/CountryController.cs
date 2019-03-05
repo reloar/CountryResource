@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CountryResource.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api")]
   
     public class CountryController : WebController
     {
@@ -53,10 +53,17 @@ namespace CountryResource.Controllers
 
         // GET api/values/5
         [HttpGet("countries/{id}")]
-        public async Task<IActionResult> Getvalue(int countryid)
+        public async Task<IActionResult> GetCountry(int id)
         {
-            var country = _countryManager.GetCountry(countryid);
-            return Ok();
+            var country =await  _countryManager.GetCountry(id);
+
+            return Ok(new ApiResponse<CountryModel>()
+            {
+                Data = country,
+                Message = "Succesful",
+                StatusCode = HttpStatusCode.OK
+            });
+           
         }
         // PUT api/values/5
         [HttpPut("countries/{id}")]
@@ -66,16 +73,38 @@ namespace CountryResource.Controllers
             var update = await _countryManager.AddCountry(model);
             return Ok(new ApiResponse<CountryModel>()
             {
-                Data = model,
-                Message = "Succeeded",
+                Data = update,
+                Message = "Successful",
                 StatusCode = HttpStatusCode.OK
             });
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("countries/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
+            var update = await _countryManager.DeleteCountry(id);
+            return Ok(new ApiResponse<CountryModel>()
+            {
+                Data = update,
+                Message = "Delete Successful",
+                StatusCode = HttpStatusCode.OK
+            });
+        }
+
+
+        [HttpGet("acivities")]
+
+        public async Task<IActionResult> GetActivities()
+        {
+            var countries = await _countryManager.GetAllCountries();
+
+            return Ok(new ApiResponse<List<CountryModel>>()
+            {
+                Data = countries,
+                Message = "",
+                StatusCode = HttpStatusCode.OK
+            });
         }
     }
 }

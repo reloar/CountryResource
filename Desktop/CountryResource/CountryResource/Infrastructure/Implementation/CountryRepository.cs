@@ -29,9 +29,13 @@ namespace CountryResource.Infrastructure.Implementation
             return country;
         }
 
-        public Task<CountryModel> DeleteCountry(int countryid)
+        public async Task<CountryModel> DeleteCountry(int countryid)
         {
-            throw new NotImplementedException();
+            var deletecountry = await _context.Set<Country>().FindAsync(countryid);
+
+               var isDeleted=_context.Entry(deletecountry).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+            return new CountryModel().Assign(isDeleted);
         }
 
         public async Task<List<CountryModel>> GetAllCountries()
@@ -53,21 +57,21 @@ namespace CountryResource.Infrastructure.Implementation
         {
 
             var query = await _context.Set<Country>().FirstOrDefaultAsync(p => p.CountryId == countryid);
-           
-            var model = new CountryModel().Assign(query);
 
-            return model;
+            return new CountryModel().Assign(query);
+
         }
 
         public async Task<CountryModel> UpdateCountry(CountryModel model)
         {
+            model.DateCreated = DateTime.Now;
             var updatecountry = await _context.Set<Country>().FindAsync(model.CountryId);
-            if (updatecountry == null) throw new Exception("Product not Found");
+            if (updatecountry == null) throw new Exception("country not Found");
             updatecountry.Assign(model);
-            _context.Update(updatecountry);
+          
 
             await _context.SaveChangesAsync();
-            return model;
+            return new CountryModel().Assign(updatecountry);
         }
     }
 }

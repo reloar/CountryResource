@@ -17,7 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CountryResource.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
    
     public class AuthenticationController : Controller
     {
@@ -48,8 +48,7 @@ namespace CountryResource.Controllers
             if (result.Status)
             {
                 return Ok(new ApiResponse<UserModel>()
-                {
-                    Data = user,
+                {                    
                     Message = "Successful",
                     StatusCode = HttpStatusCode.OK
                 });
@@ -67,10 +66,10 @@ namespace CountryResource.Controllers
 
             var user = await _userManager.Verifyuser(obj.Email, obj.password);
             if (user == null) {
-                return BadRequest(new ApiResponse<UserModel>()
+                return Unauthorized(new ApiResponse<UserModel>()
                 {
                    
-                    Message = "Internal server erroe",
+                    Message = "User not authorized",
                     StatusCode = HttpStatusCode.Unauthorized
                 });
             }

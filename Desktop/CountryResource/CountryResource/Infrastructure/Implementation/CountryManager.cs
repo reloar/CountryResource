@@ -27,9 +27,9 @@ namespace CountryResource.Infrastructure.Implementation
             }
         }
 
-        public Task<CountryModel> DeleteCountry(int countryid)
+        public async Task<CountryModel> DeleteCountry(int countryid)
         {
-            throw new NotImplementedException();
+            return await _contryRepo.DeleteCountry(countryid);
         }
 
         public async Task<List<CountryModel>> GetAllCountries()
