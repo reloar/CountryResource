@@ -50,7 +50,7 @@ namespace CountryResource
             });
 
 
-            services.AddScoped<DbContext, CountryData>();
+           
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICountryManager, CountryManager>();
@@ -72,22 +72,17 @@ namespace CountryResource
             services.AddMvc().AddJsonOptions(opt => {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new Info { Title = "CountryResource", Version = "v1" });
-            //    c.CustomSchemaIds((type) => type.IsNested ? type.FullName : type.Name);
 
-            //    // Set the comments path for the Swagger JSON and UI.
-            //    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            //    var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
-            //    c.IncludeXmlComments(xmlPath);
-
-            //    c.AddSecurityDefinition("Bearer", new ApiKeyScheme { In = "header", Description = "Please enter JWT with Bearer into field", Name = "Authorization", Type = "apiKey" });
-            //    c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>> {
-            //        { "Bearer", Enumerable.Empty<string>() },
-            //    });
-            //});
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "CountryResource",
+                    Version = "v1" ,
+                    Description="Country Resource"
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,20 +103,22 @@ namespace CountryResource
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
-            //app.UseSwagger();
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.RoutePrefix = "docs";
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "CountryResource");
-            //});
+           
             app.UseAuthentication();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = string.Empty;
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CountryResource");
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            
         }
     }
 }

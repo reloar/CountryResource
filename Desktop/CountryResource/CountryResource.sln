@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountryResource", "CountryResource\CountryResource.csproj", "{D4BA848C-2BD3-4192-A6EA-083FFDB1C9B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountryResource", "CountryResource\CountryResource.csproj", "{D4BA848C-2BD3-4192-A6EA-083FFDB1C9B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{5D4B6813-6C24-430C-9487-0EB4A8019F30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountryResource.Test", "CountryResource.Test\CountryResource.Test.csproj", "{28141EFC-AB02-4897-A143-78C76B92BC78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,10 @@ Global
 		{D4BA848C-2BD3-4192-A6EA-083FFDB1C9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4BA848C-2BD3-4192-A6EA-083FFDB1C9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4BA848C-2BD3-4192-A6EA-083FFDB1C9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28141EFC-AB02-4897-A143-78C76B92BC78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28141EFC-AB02-4897-A143-78C76B92BC78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28141EFC-AB02-4897-A143-78C76B92BC78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28141EFC-AB02-4897-A143-78C76B92BC78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

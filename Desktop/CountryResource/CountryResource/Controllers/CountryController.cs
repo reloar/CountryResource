@@ -12,10 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CountryResource.Controllers
 {
-    [Authorize]
-    [Route("api")]
+    //[Authorize]
+    [Route("api/[Controller]")]
   
-    public class CountryController : WebController
+    public class CountryController : Controller
     {
         private readonly ICountryManager _countryManager;
         public CountryController(ICountryManager countryManager)

@@ -17,13 +17,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CountryResource.Controllers
 {
-    [Route("api")]
+    [Route("api/[controller]")]
    
     public class AuthenticationController : Controller
     {
         private readonly IConfiguration _config;
         private readonly IUserManager _userManager;
-        //private readonly UserManager<User> _usrMagr;
+
         public AuthenticationController(IUserManager userManager,  IConfiguration config)
         {
             _userManager = userManager;

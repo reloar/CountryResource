@@ -1,4 +1,5 @@
-﻿using CountryResource.DomainModels;
+﻿using CountryResource.DataContext;
+using CountryResource.DomainModels;
 using CountryResource.Entities;
 using CountryResource.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +12,8 @@ namespace CountryResource.Infrastructure.Implementation
 {
     public class CountryRepository : ICountryRepository
     {
-        private readonly DbContext _context;
-        public CountryRepository(DbContext context)
+        private readonly CountryData _context;
+        public CountryRepository(CountryData context)
         {
             _context = context;
         }
@@ -31,7 +32,7 @@ namespace CountryResource.Infrastructure.Implementation
 
         public async Task<CountryModel> DeleteCountry(int countryid)
         {
-            var deletecountry = await _context.Set<Country>().FindAsync(countryid);
+            var deletecountry = await _context.Countries.FindAsync(countryid);
 
                var isDeleted=_context.Entry(deletecountry).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
@@ -40,7 +41,7 @@ namespace CountryResource.Infrastructure.Implementation
 
         public async Task<List<CountryModel>> GetAllCountries()
         {
-            var allcountry = await _context.Set<Country>()
+            var allcountry = await _context.Countries
                  .Select(x =>
                      new CountryModel
                      {
@@ -56,7 +57,7 @@ namespace CountryResource.Infrastructure.Implementation
         public async Task<CountryModel> GetCountry(int countryid)
         {
 
-            var query = await _context.Set<Country>().FirstOrDefaultAsync(p => p.CountryId == countryid);
+            var query = await _context.Countries.FirstOrDefaultAsync(p => p.CountryId == countryid);
 
             return new CountryModel().Assign(query);
 
@@ -65,7 +66,7 @@ namespace CountryResource.Infrastructure.Implementation
         public async Task<CountryModel> UpdateCountry(CountryModel model)
         {
             model.DateCreated = DateTime.Now;
-            var updatecountry = await _context.Set<Country>().FindAsync(model.CountryId);
+            var updatecountry = await _context.Countries.FindAsync(model.CountryId);
             if (updatecountry == null) throw new Exception("country not Found");
             updatecountry.Assign(model);
           

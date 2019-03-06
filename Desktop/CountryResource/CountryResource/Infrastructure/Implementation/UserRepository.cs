@@ -4,14 +4,15 @@ using CountryResource.Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System;
+using CountryResource.DataContext;
 
 namespace CountryResource.Infrastructure.Implementation
 {
     public class UserRepository : IUserRepository
     {
 
-        private readonly DbContext _context;
-        public UserRepository(DbContext context)
+        private readonly CountryData _context;
+        public UserRepository(CountryData context)
         {
             _context = context;
 
@@ -35,7 +36,7 @@ namespace CountryResource.Infrastructure.Implementation
         }
         public async Task<UserModel> Verifyuser(string username, string password)
         {
-            var user = await _context.Set<User>().FirstOrDefaultAsync(x => x.Email == username);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == username);
 
             if (user == null)
                 return null;
