@@ -74,15 +74,20 @@ namespace CountryResource
             });
 
             services.AddMvc();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Title = "CountryResource",
-                    Version = "v1" ,
-                    Description="Country Resource"
+                c.SwaggerDoc("v1", new Info { Title = "Country Resource", Version = "v1" });
+                c.CustomSchemaIds((type) => type.IsNested ? type.FullName : type.Name);
+
+            
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme { In = "header", Description = "Please enter JWT with Bearer into field", Name = "Authorization", Type = "apiKey" });
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>> {
+                    { "Bearer", Enumerable.Empty<string>() },
                 });
             });
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
