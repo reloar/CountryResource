@@ -72,6 +72,8 @@ query string : /countries/:id
 # CountryResource Endpoints
 
 ## CountryResource Api
+swagger is used for the api documentation
+
 Development Url https://localhost:44356   where development url is the port on which the project is running on the server
 
 Response<T> = { succeeded: boolean, message: string, result: T }
